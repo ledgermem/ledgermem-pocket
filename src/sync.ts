@@ -60,7 +60,13 @@ export async function syncOnce(opts: SyncOptions): Promise<SyncResult> {
     for (const item of items) {
       if (seenIds.has(item.item_id)) continue;
       seenIds.add(item.item_id);
-      await opts.memory.add(buildContent(item), {
+      // Pocket sometimes returns items where status="2" means deleted —
+      // those should not be ingested as memories.
+      if (item.status === "2") continue;
+      const content = buildContent(item);
+      // Items with no title, url, or excerpt have nothing useful to store.
+      if (content.trim() === "(untitled)" || content.trim().length === 0) continue;
+      await opts.memory.add(content, {
         metadata: {
           source: "pocket",
           pocketId: item.item_id,

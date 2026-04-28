@@ -1,6 +1,6 @@
 import type { LedgerMem } from "@ledgermem/memory";
 import { PocketClient, type PocketItem } from "./pocket-client.js";
-import { loadState, saveState, type SyncState } from "./state.js";
+import { acquireLock, loadState, saveState, type SyncState } from "./state.js";
 
 export interface MemoryClient {
   add: LedgerMem["add"];
@@ -31,6 +31,18 @@ function tagList(item: PocketItem): string[] {
 }
 
 export async function syncOnce(opts: SyncOptions): Promise<SyncResult> {
+  // Lock so a cron run and a manual trigger can't interleave: an earlier
+  // run finishing later would overwrite the newer `lastSince` with a stale
+  // value, silently re-ingesting items on the next cron tick.
+  const release = acquireLock(opts.statePath);
+  try {
+    return await runSyncOnce(opts);
+  } finally {
+    release();
+  }
+}
+
+async function runSyncOnce(opts: SyncOptions): Promise<SyncResult> {
   const state: SyncState = loadState(opts.statePath);
   let offset = 0;
   let itemsSynced = 0;

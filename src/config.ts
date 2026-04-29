@@ -1,8 +1,8 @@
 export interface PocketConfig {
   consumerKey: string;
   accessToken: string;
-  ledgermemApiKey: string;
-  ledgermemWorkspaceId: string;
+  getmnemoApiKey: string;
+  getmnemoWorkspaceId: string;
   statePath: string;
   pageSize: number;
 }
@@ -10,8 +10,8 @@ export interface PocketConfig {
 const REQUIRED = [
   "POCKET_CONSUMER_KEY",
   "POCKET_ACCESS_TOKEN",
-  "LEDGERMEM_API_KEY",
-  "LEDGERMEM_WORKSPACE_ID",
+  "GETMNEMO_API_KEY",
+  "GETMNEMO_WORKSPACE_ID",
 ] as const;
 
 export function loadConfig(): PocketConfig {
@@ -23,10 +23,10 @@ export function loadConfig(): PocketConfig {
   return {
     consumerKey: process.env.POCKET_CONSUMER_KEY as string,
     accessToken: process.env.POCKET_ACCESS_TOKEN as string,
-    ledgermemApiKey: process.env.LEDGERMEM_API_KEY as string,
-    ledgermemWorkspaceId: process.env.LEDGERMEM_WORKSPACE_ID as string,
+    getmnemoApiKey: process.env.GETMNEMO_API_KEY as string,
+    getmnemoWorkspaceId: process.env.GETMNEMO_WORKSPACE_ID as string,
     statePath:
-      process.env.POCKET_STATE_PATH ?? `${home}/.ledgermem/pocket.json`,
+      process.env.POCKET_STATE_PATH ?? `${home}/.getmnemo/pocket.json`,
     pageSize: Number(process.env.POCKET_PAGE_SIZE ?? 30),
   };
 }

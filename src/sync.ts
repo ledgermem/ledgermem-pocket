@@ -1,9 +1,9 @@
-import type { LedgerMem } from "@ledgermem/memory";
+import type { Mnemo } from "@getmnemo/memory";
 import { PocketClient, type PocketItem } from "./pocket-client.js";
 import { acquireLock, loadState, saveState, type SyncState } from "./state.js";
 
 export interface MemoryClient {
-  add: LedgerMem["add"];
+  add: Mnemo["add"];
 }
 
 export interface SyncOptions {

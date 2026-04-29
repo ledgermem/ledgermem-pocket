@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 import "dotenv/config";
-import { LedgerMem } from "@ledgermem/memory";
+import { Mnemo } from "@getmnemo/memory";
 import { loadConfig } from "./config.js";
 import { PocketClient } from "./pocket-client.js";
 import { syncOnce } from "./sync.js";
 
 async function main(): Promise<void> {
   const cfg = loadConfig();
-  const memory = new LedgerMem({
-    apiKey: cfg.ledgermemApiKey,
-    workspaceId: cfg.ledgermemWorkspaceId,
+  const memory = new Mnemo({
+    apiKey: cfg.getmnemoApiKey,
+    workspaceId: cfg.getmnemoWorkspaceId,
   });
   const pocket = new PocketClient(cfg.consumerKey, cfg.accessToken);
   const result = await syncOnce({

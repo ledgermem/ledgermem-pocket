@@ -1,7 +1,7 @@
 {
-  "name": "@ledgermem/pocket",
+  "name": "@getmnemo/pocket",
   "version": "0.1.0",
-  "description": "LedgerMem Pocket connector — sync archived Pocket items to LedgerMem.",
+  "description": "Mnemo Pocket connector — sync archived Pocket items to Mnemo.",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
@@ -18,7 +18,7 @@
     "node": ">=22"
   },
   "dependencies": {
-    "@ledgermem/memory": "^0.1.0",
+    "@getmnemo/memory": "^0.1.0",
     "dotenv": "^16.4.5"
   },
   "devDependencies": {

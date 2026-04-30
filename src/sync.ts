@@ -1,4 +1,4 @@
-import type { Mnemo } from "@getmnemo/memory";
+import type { Mnemo } from "@mnemo/memory";
 import { PocketClient, type PocketItem } from "./pocket-client.js";
 import { acquireLock, loadState, saveState, type SyncState } from "./state.js";
 

@@ -1,5 +1,5 @@
 {
-  "name": "@getmnemo/pocket",
+  "name": "@mnemo/pocket",
   "version": "0.1.0",
   "description": "Mnemo Pocket connector — sync archived Pocket items to Mnemo.",
   "type": "module",
@@ -18,7 +18,7 @@
     "node": ">=22"
   },
   "dependencies": {
-    "@getmnemo/memory": "^0.1.0",
+    "@mnemo/memory": "^0.1.0",
     "dotenv": "^16.4.5"
   },
   "devDependencies": {
